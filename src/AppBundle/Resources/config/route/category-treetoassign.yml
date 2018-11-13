@@ -1,0 +1,55 @@
+app_categorytreetoassign_index:
+    path: /
+    defaults: { _controller: AppBundle:CartCategoryHasProduct:index }
+    methods: [GET]
+
+app_categorytreetoassign_create:
+    path: /create
+    defaults: { _controller: AppBundle:CartCategoryHasProduct:create }
+    requirements:
+    methods: [POST]
+
+app_categorytreetoassign_create_child:
+    path: /create-child
+    defaults: { _controller: AppBundle:CartCategoryHasProduct:createChild }
+    requirements:
+    methods: [POST]
+
+app_categorytreetoassign_edit:
+    path:  /edit
+    defaults:
+        _controller: AppBundle:CartCategoryHasProduct:edit
+    requirements:
+    methods: [POST, PUT]
+
+app_categorytreetoassign_delete:
+    path: /delete
+    defaults: { _controller: AppBundle:CartCategoryHasProduct:delete }
+    requirements:
+    methods: [DELETE]
+
+app_categorytreetoassign_view:
+    path: /view
+    defaults: { _controller: AppBundle:CartCategoryHasProduct:view }
+    requirements:
+    methods: [POST]
+
+app_categorytreetoassign_boxright_search:
+    path: /box-right-search
+    defaults: { _controller: AppBundle:CartCategoryHasProduct:boxRightSearch }
+    requirements:
+    methods: [POST]
+
+app_categorytreetoassign_boxleft_has_boxright:
+    path:  /boxleft-has-boxright
+    defaults:
+        _controller: AppBundle:CartCategoryHasProduct:boxleftHasBoxright
+    requirements:
+    methods: [POST]
+
+app_categorytreetoassign_assign:
+    path:  /assign
+    defaults:
+        _controller: AppBundle:CartCategoryHasProduct:assign
+    requirements:
+    methods: [POST]

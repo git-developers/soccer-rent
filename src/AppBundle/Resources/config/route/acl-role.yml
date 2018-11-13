@@ -1,0 +1,39 @@
+app_role_index:
+    path:  /
+    defaults:
+        _controller: AppBundle:AclRole:index
+    methods: [GET]
+
+app_role_create:
+    path:  /create
+    defaults:
+        _controller: AppBundle:AclRole:create
+    methods: [POST]
+
+app_role_edit:
+    path:  /edit
+    defaults:
+        _controller: AppBundle:AclRole:edit
+    requirements:
+    methods: [POST, PUT]
+
+app_role_delete:
+    path:  /delete
+    defaults:
+        _controller: AppBundle:AclRole:delete
+    requirements:
+    methods: [DELETE]
+
+app_role_view:
+    path:  /view
+    defaults:
+        _controller: AppBundle:AclRole:view
+    requirements:
+    methods: [POST]
+
+app_role_info:
+    path:  /info
+    defaults:
+        _controller: AppBundle:AclRole:info
+    requirements:
+    methods: [POST]

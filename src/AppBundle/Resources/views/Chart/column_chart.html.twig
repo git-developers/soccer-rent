@@ -1,0 +1,85 @@
+{% extends "AppBundle::template.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawStuff);
+
+        function drawStuff() {
+            var data = new google.visualization.arrayToDataTable([
+                ['Move', 'Percentage'],
+                ["Pdv 1", 44],
+                ["Pdv 2", 31],
+                ["Pdv 3", 12],
+                ["Pdv 4", 10],
+                ['Pdv 5', 3]
+            ]);
+
+            var options = {
+                width: 800,
+                legend: { position: 'none' },
+                chart: {
+                    title: 'Visitas a los puntos de venta',
+                    subtitle: 'por porcentage' },
+                axes: {
+                    x: {
+                        0: { side: 'top', label: 'visitas'} // Top x-axis.
+                    }
+                },
+                bar: { groupWidth: "90%" }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+            // Convert the Classic options to Material options.
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        };
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-bar-chart"></i> Reporte Column Chart
+            <small>chart</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header"> {# with-border #}
+                        <h3 class="box-title">Chart</h3>
+                    </div>
+                    <div class="box-body">
+
+                        <div id="top_x_div" style="width: 800px; height: 600px;"></div>
+
+                    </div>
+                    <div class="box-footer">
+                        {#<button type="submit" class="btn btn-primary">Enviar</button>#}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

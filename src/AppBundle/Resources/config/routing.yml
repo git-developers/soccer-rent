@@ -1,0 +1,63 @@
+app_default:
+    resource: "@AppBundle/Resources/config/route/default.yml"
+    prefix: /
+
+app_security:
+    resource: "@AppBundle/Resources/config/route/security.yml"
+    prefix: /security
+
+app_route:
+    resource: "@AppBundle/Resources/config/route/route.yml"
+    prefix: /route
+
+app_map:
+    resource: "@AppBundle/Resources/config/route/map.yml"
+    prefix: /map
+
+app_run:
+    resource: "@AppBundle/Resources/config/route/run.yml"
+    prefix: /run
+
+app_categorytree:
+    resource: "@AppBundle/Resources/config/route/category-tree.yml"
+    prefix: /category-tree
+
+app_product:
+    resource: "@AppBundle/Resources/config/route/product.yml"
+    prefix: /product
+
+app_user:
+    resource: "@AppBundle/Resources/config/route/user.yml"
+    prefix: /user
+
+app_role:
+    resource: "@AppBundle/Resources/config/route/acl-role.yml"
+    prefix: /acl-role
+
+app_profile:
+    resource: "@AppBundle/Resources/config/route/profile.yml"
+    prefix: /profile
+
+app_pointofsale:
+    resource:  "@AppBundle/Resources/config/route/pointofsale.yml"
+    prefix: /point-of-sale
+
+app_categorytreetoassign:
+    resource: "@AppBundle/Resources/config/route/category-treetoassign.yml"
+    prefix: /category-tree-to-assign
+
+app_cartcheckoutproduct:
+    resource: "@AppBundle/Resources/config/route/cart-checkout-product.yml"
+    prefix: /cart-checkout-product
+
+app_chart:
+    resource: '@AppBundle/Resources/config/route/chart.yml'
+    prefix: /chart
+
+app_bet:
+    resource: '@AppBundle/Resources/config/route/bet.yml'
+    prefix: /bet
+
+app_reserva:
+    resource: '@AppBundle/Resources/config/route/reserva.yml'
+    prefix: /reserva

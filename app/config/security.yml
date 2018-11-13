@@ -1,0 +1,73 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+#            id: fos_user.user_provider.username
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                login_path: app_security_login
+#                check_path: app_security_login_check
+                default_target_path: app_map_index
+                # if you are using Symfony < 2.8, use the following config instead:
+                # csrf_provider: form.csrf_provider
+            logout:
+                path: app_security_logout
+                target: app_security_login
+            remember_me:
+#                token_provider: name
+                secret: "%secret%"
+#                name: NameOfTheCookie
+                lifetime: 3600 # in seconds
+                secure: false
+                httponly: true
+                always_remember_me: false
+                remember_me_parameter: _remember_me
+            anonymous: true
+
+    access_control:
+#        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/security/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/security/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/security/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/map, role: ROLE_USER }
+        - { path: ^/reserva, role: ROLE_USER }
+        - { path: ^/reserva/list, role: ROLE_USER }
+
+#        - { path: ^/backend/, role: ROLE_ADMIN }
+
+#    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+#    providers:
+#        in_memory:
+#            memory: ~
+#
+#    firewalls:
+#        # disables authentication for assets and the profiler, adapt it according to your needs
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#
+#        main:
+#            anonymous: ~
+#            # activate different ways to authenticate
+#
+#            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+#            #http_basic: ~
+#
+#            # https://symfony.com/doc/current/security/form_login_setup.html
+#            #form_login: ~

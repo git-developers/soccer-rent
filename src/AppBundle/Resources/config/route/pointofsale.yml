@@ -1,0 +1,39 @@
+app_pointofsale_index:
+    path:  /
+    defaults:
+        _controller: AppBundle:PointOfSale:index
+    methods: [GET]
+
+app_pointofsale_create:
+    path:  /create
+    defaults:
+        _controller: AppBundle:PointOfSale:create
+    methods: [POST]
+
+app_pointofsale_edit:
+    path:  /edit
+    defaults:
+        _controller: AppBundle:PointOfSale:edit
+    requirements:
+    methods: [POST, PUT]
+
+app_pointofsale_delete:
+    path:  /delete
+    defaults:
+        _controller: AppBundle:PointOfSale:delete
+    requirements:
+    methods: [DELETE]
+
+app_pointofsale_view:
+    path:  /view
+    defaults:
+        _controller: AppBundle:PointOfSale:view
+    requirements:
+    methods: [POST]
+
+app_pointofsale_info:
+    path:  /info
+    defaults:
+        _controller: AppBundle:PointOfSale:info
+    requirements:
+    methods: [POST]

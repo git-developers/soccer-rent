@@ -1,0 +1,35 @@
+app_categorytree_index:
+    path: /
+    defaults: { _controller: AppBundle:CategoryTree:index }
+    methods: [GET]
+
+app_categorytree_create:
+    path: /create
+    defaults: { _controller: AppBundle:CategoryTree:create }
+    requirements:
+    methods: [POST]
+
+app_categorytree_create_child:
+    path: /create-child
+    defaults: { _controller: AppBundle:CategoryTree:createChild }
+    requirements:
+    methods: [POST]
+
+app_categorytree_edit:
+    path:  /edit
+    defaults:
+        _controller: AppBundle:CategoryTree:edit
+    requirements:
+    methods: [POST, PUT]
+
+app_categorytree_delete:
+    path: /delete
+    defaults: { _controller: AppBundle:CategoryTree:delete }
+    requirements:
+    methods: [DELETE]
+
+app_categorytree_view:
+    path: /view
+    defaults: { _controller: AppBundle:CategoryTree:view }
+    requirements:
+    methods: [POST]

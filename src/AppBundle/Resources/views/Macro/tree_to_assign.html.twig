@@ -1,0 +1,29 @@
+{% macro loop_tree(entity, box, boxLeft, boxRight, index) %}
+
+    {% for key, value in entity %}
+
+        {% if loop.index0 == 0 %}
+            {% set index = index + 1 %}
+        {% endif %}
+
+        {% set entityParent = value.parent %}
+
+        <li
+            class="x-hand"
+            data-id="{{ entityParent.id_increment }}"
+            id="li-{{ entityParent.id_increment }}">
+
+            {{ include('AppBundle:TreeToAssign:Li/box_left.html.twig', {
+                entity:entityParent, box:box, boxLeft:boxLeft, boxRight:boxRight, badge_color:index|badge_colors()
+            }) }}
+
+            <ul class="{{ box.box_child_ul ~ entityParent.id_increment }}">
+                {% import _self as macro %}
+                {{ macro.loop_tree(value.children, box, boxLeft, boxRight, index) }}
+            </ul>
+
+        </li>
+    {% endfor %}
+
+{% endmacro %}
+

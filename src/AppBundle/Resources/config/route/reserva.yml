@@ -1,0 +1,19 @@
+app_reserva_list:
+    path: /list
+    defaults: { _controller: AppBundle:Reserva:list }
+    methods: [GET, POST]
+
+app_reserva_delete:
+    path: /
+    defaults: { _controller: AppBundle:Reserva:delete }
+    methods: [DELETE]
+
+app_reserva_create:
+    path: /{pdvId}
+    defaults: { _controller: AppBundle:Reserva:create }
+    methods: [GET, POST]
+
+app_reserva_edit:
+    path: /edit/{reservaId}
+    defaults: { _controller: AppBundle:Reserva:edit }
+    methods: [GET, POST]

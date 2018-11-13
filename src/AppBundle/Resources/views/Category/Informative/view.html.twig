@@ -1,0 +1,51 @@
+{% spaceless %}
+    <div class="box box-solid">
+        {#<div class="box-header with-border">#}
+            {#<h3 class="box-title">About Me</h3>#}
+        {#</div>#}
+
+        <div class="box-body">
+
+            <strong>
+                <i class="fa fa-book margin-r-5"></i> Code
+            </strong>
+
+            <p class="text-muted">
+                {{ entity.code }}
+            </p>
+
+            <hr>
+
+            <strong>
+                <i class="fa fa-book margin-r-5"></i> Nombre
+            </strong>
+
+            <p class="text-muted">
+                {{ entity.name }}
+            </p>
+
+            <hr>
+
+            <strong>
+                <i class="fa fa-map-marker margin-r-5"></i> Slug
+            </strong>
+
+            <p class="text-muted">
+                {{ entity.slug }}
+            </p>
+
+            <hr>
+
+            <strong>
+                <i class="fa fa-book margin-r-5"></i> created at
+            </strong>
+
+            <p class="text-muted">
+                {{ entity.createdAt|date('Y-m-d H:i:s') }}
+            </p>
+
+            <hr>
+
+        </div>
+    </div>
+{% endspaceless %}

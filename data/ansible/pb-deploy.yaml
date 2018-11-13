@@ -1,0 +1,67 @@
+#https://gist.github.com/halberom/3553a00e24468b02d8f12ed73fa33f85
+
+---
+
+- hosts: webservers
+#  gather_facts: yes
+#  remote_user: ubuntu
+
+  vars:
+    - project_name: soccer-rent
+    - project_root: /var/www/html/{{project_name}}
+#    - project_repo: git@github.com:git-developers/desercion-academica.git
+    - project_repo: git@gitlab.ec.pe:jafeth.bendezu/soccer-rent.git
+    - project_version: master
+    - project_sshkey: ~/.ssh/jafeth-xalok
+#    - project_sshkey: ~/.ssh/github
+
+  tasks:
+
+    - name: add github ssh key
+      copy: >
+        src={{project_sshkey}}
+        dest={{project_sshkey}}
+        owner=root
+        group=root
+        mode=0600
+
+#    - name: configure ssh to use ansible key for github.com
+#      template: >
+#        src=templates/ssh_config
+#        dest=~/.ssh/config
+#        owner=root
+#        group=root
+#        mode=0644
+
+    - name: clone a private repository
+      git: >
+        repo={{project_repo}}
+        key_file={{project_sshkey}}
+        dest={{project_root}}
+        accept_hostkey=yes
+        force=yes
+
+#    - name: Install Composer's dependencies
+#      composer:
+#        working_dir: "{{project_root}}"
+
+    - name: Copy NGINX config
+      copy: >
+        src=templates/nginx
+        dest=/etc/nginx/sites-enabled/{{project_name}}
+      notify: "restart web services"
+
+  handlers:
+    - name: Restart php7.0-fpm
+      service: name=php7.0-fpm state=restarted
+      listen: "restart web services"
+
+    - name: Restart nginx
+      service: name=nginx state=restarted
+      listen: "restart web services"
+
+
+#    - name: Composer create-project
+#      composer: command=create-project working_dir={{project_root}} optimize_autoloader=no
+#      become: true
+#      become_user: root

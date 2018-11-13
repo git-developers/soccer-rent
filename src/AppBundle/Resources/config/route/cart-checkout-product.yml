@@ -1,0 +1,4 @@
+app_cartcheckoutproduct_index:
+    path: /{categoryId}
+    defaults: { _controller: AppBundle:CartCheckoutProduct:index }
+    methods: [GET]

@@ -1,0 +1,189 @@
+{#Left side column. contains the logo and sidebar#}
+<aside class="main-sidebar">
+
+    {#sidebar: style can be found in sidebar.less#}
+    <section class="sidebar">
+
+        {#Sidebar user panel#}
+        {% if app.user is not null %}
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img
+                        src="{{ asset('bundles/app/main-assets/dist/img/user2-160x160.jpg')}}"
+                        {#src="{{ image_avatar }}"#}
+                        class="img-circle x-hand"
+                        alt="{{ app.user.name }} {{ app.user.lastName }}"
+                        >
+                    {#onclick="location.href='{{ path('frontend_profile_index', {slug:app.user.slug}) }}';"#}
+                </div>
+                <div class="pull-left info">
+                    <p>{{ app.user.name ~ ' ' ~ app.user.lastName }}</p>
+                    <a href="#">
+                        <i class="fa fa-circle text-success"></i> Online
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+
+        {#search form#}
+        <form id="search-box-sidebar" action="#" method="get" class="sidebar-form" >
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Buscar...">
+                <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+        </form>
+
+        {#{{ path('backend_googledrive_index', {id:'my-drive'}) }}#}
+        {#sidebar menu: : style can be found in sidebar.less#}
+        <ul class="sidebar-menu">
+            {#<li class="header">MENU</li>#}
+
+            {% if is_granted('ROLE_ADMIN', 'app_role') %}
+                <li class="treeview {% if app.request.get('_route') matches '(app_role)' %}active{% endif %}">
+                    <a href="{{ path('app_role_index') }}">
+                        <i class="fa fa-expeditedssl"></i>
+                        <span>Gestionar role</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN', 'app_profile') %}
+                <li class="treeview {% if app.request.get('_route') matches '(app_profile)' %}active{% endif %}">
+                    <a href="{{ path('app_profile_index') }}">
+                        <i class="fa fa-expeditedssl"></i>
+                        <span>Gestionar profile</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN', 'app_user') %}
+                <li class="treeview {% if app.request.get('_route') matches '(app_user)' %}active{% endif %}">
+                    <a href="{{ path('app_user_index') }}">
+                        <i class="fa fa-user"></i>
+                        <span>Gestionar usuarios</span>
+                    </a>
+                </li>
+            {% endif %}
+
+
+            {% if is_granted('ROLE_ADMIN', 'app_pointofsale') %}
+                <li class="treeview {% if app.request.get('_route') matches '(app_pointofsale)' %}active{% endif %}">
+                    <a href="{{ path('app_pointofsale_index') }}">
+                        <i class="fa fa-home"></i>
+                        <span>Gestionar canchas</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <li class="treeview {% if app.request.get('_route') matches '(app_map)' %}active{% endif %}">
+                <a href="{{ path('app_map_index') }}">
+                    <i class="fa fa-globe"></i>
+                    <span>Crear una reserva</span>
+                </a>
+            </li>
+
+            <li class="treeview {% if app.request.get('_route') matches '(app_reserva)' %}active{% endif %}">
+                <a href="{{ path('app_reserva_list') }}">
+                    <i class="fa fa-globe"></i>
+                    <span>Lista de reserva</span>
+                </a>
+            </li>
+
+
+            {#
+
+            <li class="treeview {% if app.request.get('_route') matches '(app_pointofsale)' %}active{% endif %}">
+                <a href="{{ path('app_pointofsale_index') }}">
+                    <i class="fa fa-map-marker"></i>
+                    <span>Gestionar puntos de venta</span>
+                </a>
+            </li>
+
+            <li class="treeview {% if app.request.get('_route') matches '(app_chart_piechart|app_chart_columnchart)' %}active{% endif %}">
+                <a href="#">
+                    <i class="fa fa-fw fa-bar-chart"></i>
+                    <span>Reportes</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{% if app.request.get('_route') matches '(app_chart_piechart)' %}active{% endif %}">
+                        <a href="{{ path('app_chart_piechart') }}">
+                            <i class="fa fa-circle-o text-yellow"></i>
+                            <span>Pie Chart</span>
+                        </a>
+                    </li>
+                    <li class="{% if app.request.get('_route') matches '(app_chart_columnchart)' %}active{% endif %}">
+                        <a href="{{ path('app_chart_columnchart') }}">
+                            <i class="fa fa-circle-o text-blue"></i>
+                            <span>Column Chart</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-upload"></i> <span>Subir archivo</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview {% if app.request.get('_route') matches '(backend_googledrive)' %}active{% endif %}">
+                        <a href="">
+                            <i class="fa fa-fw fa-google"></i> <span>Google drive</span>
+                            <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="{% if app.request.get('_route') matches '(backend_googledrive)' %}active{% endif %}">
+                                <a href=""><i class="fa fa-codepen"></i> Mi unidad</a>
+                            </li>
+                            <li class="{% if app.request.get('_route') matches '(backend_googledrive)' %}active{% endif %}">
+                                <a href=""><i class="fa fa-users"></i> Compartido conmigo</a>
+                            </li>
+                            <li class="{% if app.request.get('_route') matches '(backend_googledrive)' %}active{% endif %}">
+                                <a href=""><i class="fa fa-fw fa-sign-out"></i> Salir del drive</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview {% if app.request.get('_route') matches '(backend_googledrive)' %}active{% endif %}">
+                        <a href="">
+                            <i class="fa fa-fw fa-dropbox"></i> <span>Dropbox</span>
+                            <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="{% if app.request.get('_route') matches '(backend_googledrive)' %}active{% endif %}">
+                                <a href=""><i class="fa fa-codepen"></i> Mi unidad</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-calendar"></i> <span>Calendar</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-red">3</small>
+                        <small class="label pull-right bg-blue">17</small>
+                    </span>
+                </a>
+            </li>
+
+            #}
+
+        </ul>
+
+    </section>
+
+</aside>

@@ -1,0 +1,141 @@
+{% import "AppBundle::Macro/html.html.twig" as html %}
+
+{% spaceless %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta meta charset="utf-8">
+    <meta meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="shortcut icon" href="http://www.usmp.edu.pe/images/logo.ico">
+    <title>Soccer Rent</title>
+
+    {% block stylesheets %}
+
+        {% stylesheets
+            filter='cssrewrite'
+            'bundles/app/main-assets/thirdparty/font-awesome/css/font-awesome.min.css'
+            'bundles/app/main-assets/thirdparty/ionicons/css/ionicons.min.css'
+            'bundles/app/main-assets/plugins/iCheck/flat/orange.css'
+            'bundles/app/main-assets/plugins/iCheck/square/orange.css'
+            'bundles/app/main-assets/plugins/iCheck/square/green.css'
+            'bundles/app/main-assets/plugins/iCheck/square/pink.css'
+            'bundles/app/main-assets/bootstrap/css/bootstrap.min.css'
+            '@AppBundle/Resources/public/main-assets/dist/css/AdminLTE.min.css'
+            '@AppBundle/Resources/public/main-assets/plugins/morris/morris.css'
+            '@AppBundle/Resources/public/main-assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css'
+            '@AppBundle/Resources/public/main-assets/plugins/datepicker/datepicker3.css'
+            '@AppBundle/Resources/public/main-assets/plugins/daterangepicker/daterangepicker.css'
+            '@AppBundle/Resources/public/main-assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'
+            '@AppBundle/Resources/public/main-assets/plugins/pace/pace.min.css'
+            '@AppBundle/Resources/public/main-assets/dist/css/skins/_all-skins.min.css'
+            '@AppBundle/Resources/public/css/default.css'
+        %}
+
+        {#'@AppBundle/Resources/public/common/css/skin-tianos.css'#}
+        {#'@AppBundle/Resources/public/common/css/tianos.css'#}
+        {#<link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">#}
+
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+    {% endblock %}
+
+</head>
+
+{#<body class="skin-blue sidebar-mini {% block bodyclass %}{% endblock %}">#}
+<body class="hold-transition skin-blue sidebar-mini {% block bodyclass %}{% endblock %}">
+
+<div class="wrapper">
+
+    {#{{ include("AppBundle::TemplateMain/2_header.html.twig") }}#}
+    {#{{ include("AppBundle::TemplateMain/3_left_main_sidebar.html.twig") }}#}
+
+    <div class="">
+    {#<div class="content-wrapper">#}
+        {{ html.flash_message_success }}
+        {{ html.flash_message_warning }}
+        {{ html.flash_message_error }}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> {{ project_version }}
+        </div>
+        <strong>{{ project_name }} &copy {{ "now"|date("d, F - H:i") }}</strong>
+    </footer>
+
+    {#{{ include("AppBundle::TemplateMain/4_right_control_sidebar.html.twig") }}#}
+
+</div>
+
+{% block javascripts %}
+
+    {% javascripts
+        '@AppBundle/Resources/public/main-assets/plugins/jQuery/jquery-2.2.3.min.js'
+        '@AppBundle/Resources/public/main-assets/thirdparty/ui/1.11.4/jquery-ui.min.js'
+        '@AppBundle/Resources/public/main-assets/bootstrap/js/bootstrap.min.js'
+        '@AppBundle/Resources/public/main-assets/thirdparty/raphael/raphael-min.js'
+        '@AppBundle/Resources/public/main-assets/plugins/sparkline/jquery.sparkline.min.js'
+        '@AppBundle/Resources/public/main-assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'
+        '@AppBundle/Resources/public/main-assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'
+        '@AppBundle/Resources/public/main-assets/plugins/knob/jquery.knob.js'
+        '@AppBundle/Resources/public/main-assets/thirdparty/moment/2.11.2/moment.min.js'
+        '@AppBundle/Resources/public/main-assets/plugins/daterangepicker/daterangepicker.js'
+        '@AppBundle/Resources/public/main-assets/plugins/datepicker/bootstrap-datepicker.js'
+        '@AppBundle/Resources/public/main-assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'
+        '@AppBundle/Resources/public/main-assets/plugins/slimScroll/jquery.slimscroll.min.js'
+        '@AppBundle/Resources/public/main-assets/plugins/fastclick/fastclick.js'
+        '@AppBundle/Resources/public/main-assets/dist/js/app.min.js'
+        '@AppBundle/Resources/public/main-assets/plugins/iCheck/icheck.min.js'
+        '@AppBundle/Resources/public/main-assets/plugins/slimScroll/jquery.slimscroll.min.js'
+        '@AppBundle/Resources/public/main-assets/bower_components/PACE/pace.min.js'
+        '@AppBundle/Resources/public/main-assets/dist/js/pages/dashboard.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {#HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries#}
+    <!--[if lt IE 9]>
+    <script src="{{ asset('bundles/backend/html5shiv/html5shiv.min.js')}}"></script>
+    <script src="{{ asset('bundles/backend/respond/respond.min.js')}}"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+
+        {#Resolve conflict in jQuery UI tooltip with Bootstrap tooltip#}
+        $.widget.bridge('uibutton', $.ui.button);
+
+        {#tooltip#}
+        $('[rel="tooltip"]').on('click', function () {
+            $('.flashbag').slideUp();
+        });
+
+        {#To make Pace works on Ajax calls#}
+        $(document).ajaxStart(function() { Pace.restart(); });
+
+    </script>
+
+    {#<script type="text/javascript">#}
+        {#$(function () {#}
+
+            {#$('input').iCheck({#}
+                {#checkboxClass: 'icheckbox_square-blue',#}
+                {#radioClass: 'iradio_square-blue',#}
+                {#increaseArea: '20%' // optional#}
+            {#});#}
+
+        {#});#}
+    {#</script>#}
+
+
+{% endblock %}
+
+</body>
+</html>
+{% endspaceless %}

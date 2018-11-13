@@ -1,0 +1,11 @@
+app_bet_index:
+    path:  /
+    defaults:
+        _controller: AppBundle:Bet:index
+    methods: [GET,POST]
+
+app_bet_list:
+    path:  /list
+    defaults:
+        _controller: AppBundle:Bet:betList
+    methods: [GET,POST]

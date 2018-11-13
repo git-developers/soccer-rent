@@ -1,0 +1,52 @@
+{% spaceless %}
+    <div class="box box-solid">
+        {#<div class="box-header with-border">#}
+            {#<h3 class="box-title">About Me</h3>#}
+        {#</div>#}
+
+        <div class="box-body">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-map-marker margin-r-5"></i> Group rol name
+                        </td>
+                        <td>{{ entity.groupRol }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-map-marker margin-r-5"></i> Group rol tag
+                        </td>
+                        <td>{{ entity.groupRolTag }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-book margin-r-5"></i> Action name
+                        </td>
+                        <td>{{ entity.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-map-marker margin-r-5"></i> Role
+                        </td>
+                        <td>{{ entity.slug }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <strong>
+                <i class="fa fa-file-text-o margin-r-5"></i> Notes
+            </strong>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+
+
+        </div>
+    </div>
+{% endspaceless %}

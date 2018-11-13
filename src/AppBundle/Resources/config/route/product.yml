@@ -1,0 +1,39 @@
+app_product_index:
+    path:  /
+    defaults:
+        _controller: AppBundle:CartProduct:index
+    methods: [GET]
+
+app_product_create:
+    path:  /create
+    defaults:
+        _controller: AppBundle:CartProduct:create
+    methods: [POST]
+
+app_product_edit:
+    path:  /edit
+    defaults:
+        _controller: AppBundle:CartProduct:edit
+    requirements:
+    methods: [POST, PUT]
+
+app_product_delete:
+    path:  /delete
+    defaults:
+        _controller: AppBundle:CartProduct:delete
+    requirements:
+    methods: [DELETE]
+
+app_product_view:
+    path:  /view
+    defaults:
+        _controller: AppBundle:CartProduct:view
+    requirements:
+    methods: [POST]
+
+app_product_info:
+    path:  /info
+    defaults:
+        _controller: AppBundle:CartProduct:info
+    requirements:
+    methods: [POST]

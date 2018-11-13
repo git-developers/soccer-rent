@@ -1,0 +1,86 @@
+{% extends "AppBundle::template_splash.html.twig" %}
+
+{% block bodyclass %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {#
+    {% stylesheets
+        '@AppBundle/Resources/public/common/css/tree.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    #}
+
+    <style>
+
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#
+    {% javascripts
+    '@AppBundle/Resources/public/tree/js/formCreate.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    #}
+
+    <script type="text/javascript">
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    {#<section class="content-header">#}
+        {#<h1>#}
+            {#<i class="fa fa-fw fa-dashboard"></i> Dashboard#}
+            {#<small>panel</small>#}
+        {#</h1>#}
+        {#<ol class="breadcrumb">#}
+            {#<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>#}
+            {#<li class="active">Dashboard</li>#}
+        {#</ol>#}
+    {#</section>#}
+
+    <section class="content" style="background-color: #00a65a">
+        <form name="form-category-product">
+
+            <div class="row">
+                <section class="col-md-12 connectedSortable ui-sortable">
+                    <div class="box box-solid">
+
+                        <h1 class="box-title" align="center">
+                            <i class="fa fa-fw fa-bolt"></i>Renta de canchas grass
+                        </h1>
+
+                        {#<div class="box-header ui-sortable-handle" style="text-align: center">#}
+                            {#<i class="ion ion-android-list"></i>#}
+                            {#<i class="fa fa-fw fa-bolt"></i>#}
+                            {#<h3 class="box-title">Pollo Bet</h3>#}
+                        {#</div>#}
+
+                    </div>
+
+                    {#<div align="center" class="box box-solid">#}
+                        {#btn-block #}
+                        {#<a href="{{ path('app_bet_index') }}" class="btn btn-lg btn-success btn-sm">INGRESAR</a>#}
+                    {#</div>#}
+
+                </section>
+            </div>
+
+        </form>
+    </section>
+
+    {#{{ include('AppBundle:Modal:register_user.html.twig') }}#}
+
+{% endblock %}

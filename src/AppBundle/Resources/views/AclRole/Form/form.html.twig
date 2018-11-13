@@ -1,0 +1,40 @@
+{% spaceless %}
+
+    {% if id is defined %}
+        <input type="hidden" value="{{ id }}" name="id">
+    {% endif %}
+
+    {{ form_widget(formEntity._token) }}
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <i class="fa fa-fw fa-text-width"></i>
+                {{ form_label(formEntity.groupRol) }}
+                {{ form_widget(formEntity.groupRol) }}
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                {{ form_label(formEntity.groupRolTag) }}
+                {{ form_widget(formEntity.groupRolTag) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                {{ form_label(formEntity.name) }}
+                {{ form_widget(formEntity.name) }}
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                {{ form_label(formEntity.slug) }}
+                {{ form_widget(formEntity.slug) }}
+            </div>
+        </div>
+    </div>
+
+{% endspaceless %}

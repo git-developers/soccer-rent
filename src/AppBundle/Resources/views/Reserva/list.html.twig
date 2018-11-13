@@ -1,0 +1,177 @@
+{% extends "AppBundle::template.html.twig" %}
+
+{% block bodyclass %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {#
+    {% stylesheets
+        '@AppBundle/Resources/public/common/css/tree.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    #}
+
+    <style>
+
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#
+    {% javascripts
+    '@AppBundle/Resources/public/tree/js/formCreate.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    #}
+
+    {#
+
+    #}
+    <script type="text/javascript">
+
+        $( "button.btn-danger" ).click(function() {
+
+//            var r = confirm("Esta seguro?");
+//            if (r == false) {
+//                return;
+//            }
+
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: '{{ path('app_reserva_delete') }}',
+                type: 'DELETE',
+                dataType: 'json',
+                data: {
+                    id:id
+                },
+                beforeSend: function(jqXHR, settings) {
+
+                },
+                success: function(data, textStatus, jqXHR) {
+                    $('#tr-' + id).remove();
+                },
+                error: function(jqXHR, exception) {
+
+                }
+            });
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-globe"></i> Lista de reservas
+            <small>panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <section class="col-md-12 connectedSortable ui-sortable">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Datos</h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="box-body table-responsive">
+
+                                <table class="table table-condensed table-striped ">
+                                    <tbody>
+                                    <tr class="bg-light-blue">
+                                        <th>#</th>
+                                        <th>cancha</th>
+                                        <th>fecha de reserva</th>
+                                        <th>time</th>
+                                        <th>Progress</th>
+                                        <th>creado</th>
+                                        <th>Label</th>
+                                        <th>-</th>
+                                        <th>-</th>
+                                    </tr>
+
+                                    {% for key, entity in entities %}
+
+                                        {% set random = random(100) %}
+
+                                        <tr id="tr-{{ entity.id_increment }}">
+                                            <td>{{ entity.id_increment }}</td>
+                                            <td>
+                                                <span class="badge bg-light-blue">
+                                                    {{ entity.point_of_sale.id_increment }}
+                                                </span>
+                                                {{ entity.point_of_sale.name }}
+                                            </td>
+                                            <td>{{ entity.inicio }}</td>
+                                            <td>
+                                                <i class="fa fa-fw fa-clock-o"></i> {{ entity.time }}
+                                            </td>
+                                            <td>
+                                                <div class="progress progress-xs progress-striped active">
+                                                    <div class="progress-bar progress-bar-primary" style="width: {{ random }}%"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{ entity.created_at }}
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-light-blue">{{ random }} %</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs" data-id="{{ entity.id_increment }}">
+                                                    <i class="fa fa-fw fa-trash"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('app_reserva_edit', {reservaId:entity.id_increment}) }}" class="btn btn-warning btn-xs">
+                                                    <i class="fa fa-fw fa-pencil"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td>
+                                                No hay resultados.
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="box-footer">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </section>
+
+    {#{{ include('AppBundle:Tree:Modal/create.html.twig') }}#}
+
+{% endblock %}

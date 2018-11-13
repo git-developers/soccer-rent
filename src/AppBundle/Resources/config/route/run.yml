@@ -1,0 +1,4 @@
+app_run_index:
+    path: /
+    defaults: { _controller: AppBundle:Run:index }
+    methods: [GET, POST]

@@ -1,0 +1,126 @@
+{% spaceless %}
+
+    {% set bg_role = 'bg-green-active' %}
+
+    {% if id is defined %}
+        {% set bg_role = 'bg-yellow-active' %}
+        <input type="hidden" value="{{ id }}" name="id">
+    {% endif %}
+
+    {{ form_widget(formEntity._token) }}
+
+    <div class="form-group">
+        {{ form_label(formEntity.name) }}
+        {{ form_widget(formEntity.name) }}
+    </div>
+
+    {% block choice_widget %}
+        {% spaceless %}
+            <div class="form-group ">
+                {{ form_label(formEntity.role) }}
+
+                <div class="row">
+                    <div>
+                    <div>
+                    <div>
+
+                    {% set value = null %}
+                    {% set tagNew = null %}
+                    {% set tagOld = null %}
+
+                    {% for child in formEntity.role.children %}
+
+                        {% set choiceView = formEntity.role.vars.choices[child.vars.value] %}
+                        {% set tagNew = choiceView.data.groupRolTag %}
+
+                        {% if tagNew != tagOld %}
+                            {% set tagOld = choiceView.data.groupRolTag %}
+                            {% set tagName = choiceView.data.groupRol %}
+
+                            </div>
+                            </div>
+                            </div>
+                            <div class="col-md-3">
+                            <div class="box box-solid {{ bg_role }}">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">
+                                        <i class="fa fa-fw fa-star-o"></i> {{ tagName }}
+                                    </h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            <div class="box-body">
+                        {% endif %}
+
+                        <div class="checkbox">
+                            <label>
+                                {{ form_widget(child) }}
+                                {{ form_label(child, null, { 'label_attr': {'class': 'control-label '} }) }}
+                            </label>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        {% endspaceless %}
+    {% endblock choice_widget %}
+
+{% endspaceless %}
+
+
+
+
+
+    {#
+
+    {% block choice_widget %}
+        {% spaceless %}
+            <div class="form-group ">
+                {{ form_label(formEntity.role) }}
+
+                <div class="col-sm-10 ">
+                    <div>
+                        <div>
+                            <div>
+                                {% set value = null %}
+                                {% set tagNew = null %}
+                                {% set tagOld = null %}
+                                {% for child in formEntity.role.children %}
+
+                                    {% set choiceView = formEntity.role.vars.choices[child.vars.value] %}
+                                    {% set tagNew = choiceView.data.groupRolTag %}
+
+                                    {% if tagNew != tagOld %}
+                                        {% set tagOld = choiceView.data.groupRolTag %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 ">
+
+                                            <div class="box box-success box-solid" style="max-height: 250px; min-height: 250px; ">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">{{ tagNew }}</h3>
+                                                </div>
+                                                <div class="box-body">
+                                    {% endif %}
+                                    <div class="checkbox">
+                                        <label>
+                                            {{ form_widget(child, {'attr': {'class': 'flat-red', 'style': 'position: absolute; opacity: 0;'}}) }}
+                                            {{ form_label(child, null, { 'label_attr': {'class': 'control-label '} }) }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endspaceless %}
+    {% endblock choice_widget %}
+
+    #}
+

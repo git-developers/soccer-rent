@@ -1,0 +1,83 @@
+{% spaceless %}
+
+    {% if id is defined %}
+        <input type="hidden" value="{{ id }}" name="id">
+    {% endif %}
+
+    {{ form_widget(formEntity._token) }}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <i class="fa fa-fw fa-home"></i>
+                {{ form_label(formEntity.pointOfSale) }}
+                {{ form_widget(formEntity.pointOfSale) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <i class="fa fa-fw fa-home"></i>
+                {{ form_label(formEntity.description) }}
+                {{ form_widget(formEntity.description) }}
+                {#{{ form_label(formEntity.categoryId) }}#}
+                {#{{ form_widget(formEntity.categoryId) }}#}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(formEntity.code) }}
+                {{ form_widget(formEntity.code) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(formEntity.name) }}
+                {{ form_widget(formEntity.name) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <i class="fa fa-fw fa-map-marker"></i>
+                {{ form_label(formEntity.latitude) }}
+                {{ form_widget(formEntity.latitude) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <i class="fa fa-fw fa-map-marker"></i>
+                {{ form_label(formEntity.longitude) }}
+                {{ form_widget(formEntity.longitude) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <i class="fa fa-fw fa-phone"></i>
+                {{ form_label(formEntity.telephone) }}
+                {{ form_widget(formEntity.telephone) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <i class="fa fa-fw fa-money"></i>
+                {{ form_label(formEntity.precioPorHora) }}
+                {{ form_widget(formEntity.precioPorHora) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <i class="fa fa-fw fa-image"></i>
+        {{ form_label(formEntity.image) }}
+        {{ form_widget(formEntity.image) }}
+    </div>
+
+{% endspaceless %}

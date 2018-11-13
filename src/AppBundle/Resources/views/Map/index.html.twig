@@ -1,0 +1,164 @@
+{% extends "AppBundle::template.html.twig" %}
+
+{% block bodyclass %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {#
+    {% stylesheets
+        '@AppBundle/Resources/public/common/css/tree.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    #}
+
+    <style>
+        #googleMap{
+            /*z-index: 1;*/
+            /*position: absolute;*/
+            /*top: 0px;*/
+            /*left: 0px;*/
+        }
+        .outer{
+            /*background-color: red;*/
+            width: 100%;
+            height: 100px;
+            position: absolute;
+            top: 410px;
+            left: 0px;
+        }
+        .outer .inner-left{
+            border-radius: 50px;
+            height: 50px;
+            width: 50px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 55px;
+            border: 1px solid #333;
+            float: left;
+            margin-left: 15%;
+        }
+        .outer .inner-middle{
+            background-color: #d4ff2b;
+            border-radius: 50px;
+            height: 100px;
+            width: 100px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 100px;
+            font-weight: bold;
+            float: left;
+        }
+        .outer .inner-right{
+            border-radius: 50px;
+            height: 50px;
+            width: 50px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 55px;
+            border: 1px solid #333;
+            float: left;
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#
+    {% javascripts
+    '@AppBundle/Resources/public/tree/js/formCreate.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    #}
+
+    {#
+
+    #}
+    <script type="text/javascript">
+        function initMap() {
+
+            var myLatLng = {lat: -12.0720252, lng: -76.9418467};
+
+            var map = new google.maps.Map(document.getElementById('googleMap'), {
+                zoom: 17,
+                center: myLatLng
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Aqui estas tu'
+            });
+
+            {% for key, pdv in point_of_sales %}
+                var myLatLng{{ key }} = {lat: {{ pdv.latitude }}, lng: {{ pdv.longitude }}};
+                var marker{{ key }} = new google.maps.Marker({
+                    position: myLatLng{{ key }},
+                    map: map,
+                    icon: '{{ pdv.image }}',
+                    title: '{{ pdv.name }}',
+                    url: '{{ path('app_map_detail', {pdvId:pdv.id_increment}) }}'
+                });
+                google.maps.event.addListener(marker{{ key }}, 'click', function() {
+                    window.location.href = this.url;
+                });
+            {% endfor %}
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZzXDkv1RY69OiFCvEIIE4D6wye0UOBA&callback=initMap"></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-map-marker"></i> Mapa
+            <small>panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <form name="form-mapa">
+
+            <div class="row">
+                <section class="col-md-12 connectedSortable ui-sortable">
+                    <div class="box box-primary">
+
+                        {#
+                        <div class="box-header ui-sortable-handle" style="cursor: move;">
+                            <i class="ion ion-android-list"></i>
+                            <h3 class="box-title">items</h3>
+                        </div>
+                        #}
+
+                        <div class="box-body">
+                            <div id="googleMap" style="width:100%;height:500px;"></div>
+                        </div>
+
+                        {#
+                        <div class="box-footer clearfix no-border">
+                            <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+                        </div>#}
+
+                    </div>
+                </section>
+            </div>
+
+        </form>
+    </section>
+
+    {#{{ include('AppBundle:Tree:Modal/create.html.twig') }}#}
+
+{% endblock %}

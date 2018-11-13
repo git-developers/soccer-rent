@@ -1,0 +1,9 @@
+app_map_index:
+    path: /
+    defaults: { _controller: AppBundle:Map:index }
+    methods: [GET, POST]
+
+app_map_detail:
+    path: /detail/{pdvId}
+    defaults: { _controller: AppBundle:Map:detail }
+    methods: [GET, POST]

@@ -1,0 +1,4 @@
+app_route_index:
+    path: /
+    defaults: { _controller: AppBundle:Route:index }
+    methods: [GET, POST]

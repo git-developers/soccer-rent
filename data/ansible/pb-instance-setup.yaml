@@ -1,0 +1,49 @@
+---
+
+- hosts: webservers
+  become: true
+  become_user: root
+  vars:
+    - welcomeMsg: "Pollo gordo 33333333333"
+
+  tasks:
+#    - name: SetUp Python
+#      apt: pkg=python state=installed
+    - name: SetUp php7.0
+      apt: pkg=php7.0 state=installed update_cache=true
+    - name: SetUp php7.0-fpm
+      apt: pkg=php7.0-fpm state=installed update_cache=true
+    - name: SetUp php7.0-mysql
+      apt: pkg=php7.0-mysql state=installed update_cache=true
+    - name: SetUp php7.0-curl
+      apt: pkg=php7.0-curl state=installed update_cache=true
+    - name: SetUp php7.0-mcrypt
+      apt: pkg=php7.0-mcrypt state=installed update_cache=true
+    - name: SetUp php7.0-cli
+      apt: pkg=php7.0-cli state=installed update_cache=true
+    - name: SetUp php7.0-dev
+      apt: pkg=php7.0-dev state=installed update_cache=true
+    - name: SetUp php7.0-intl
+      apt: pkg=php7.0-intl state=installed update_cache=true
+    - name: SetUp php-mbstring
+      apt: pkg=php-mbstring state=installed update_cache=true
+
+    - name: SetUp lynx
+      apt: pkg=lynx state=installed update_cache=true
+    - name: SetUp nginx
+      apt: pkg=nginx state=installed update_cache=true
+    - name: SetUp mysql-client-core-5.7
+      apt: pkg=mysql-client-core-5.7 state=installed update_cache=true
+    - name: SetUp curl
+      apt: pkg=curl state=installed update_cache=true
+    - name: SetUp phpunit
+      apt: pkg=phpunit state=installed update_cache=true
+    - name: SetUp composer
+      shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+      args:
+        creates: /usr/local/bin/composer
+
+    - name: Delete file inside www-html
+      file:
+        state: absent
+        path: /var/www/html/index.nginx-debian.html

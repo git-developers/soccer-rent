@@ -1,0 +1,39 @@
+app_profile_index:
+    path:  /
+    defaults:
+        _controller: AppBundle:Profile:index
+    methods: [GET]
+
+app_profile_create:
+    path:  /create
+    defaults:
+        _controller: AppBundle:Profile:create
+    methods: [POST]
+
+app_profile_edit:
+    path:  /edit
+    defaults:
+        _controller: AppBundle:Profile:edit
+    requirements:
+    methods: [POST, PUT]
+
+app_profile_delete:
+    path:  /delete
+    defaults:
+        _controller: AppBundle:Profile:delete
+    requirements:
+    methods: [DELETE]
+
+app_profile_view:
+    path:  /view
+    defaults:
+        _controller: AppBundle:Profile:view
+    requirements:
+    methods: [POST]
+
+app_profile_info:
+    path:  /info
+    defaults:
+        _controller: AppBundle:Profile:info
+    requirements:
+    methods: [POST]

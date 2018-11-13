@@ -1,0 +1,155 @@
+{% import "AppBundle::Macro/html.html.twig" as html %}
+
+
+{% spaceless %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+
+        <meta meta charset="utf-8">
+        <meta meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+        <link rel="shortcut icon" href="http://www.usmp.edu.pe/images/logo.ico">
+        <title>IGol</title>
+
+        {#{{ head.meta_default() }}#}
+        {#{{ head.favicon() }}#}
+        {#{{ head.canonical() }}#}
+
+        {% block seo %}
+            {% block head %}
+
+                {#para copiar en otras paginas#}
+                {#{{ head.title() }}#}
+            {% endblock %}
+
+            {% block twitter %}
+                {#{{ twitter.card() }}#}
+
+                {#para copiar en otras paginas#}
+                {#{{ twitter.title() }}#}
+                {#{{ twitter.description() }}#}
+                {#{{ twitter.image() }}#}
+            {% endblock %}
+
+            {% block open_graph %}
+                {#{{ og.default() }}#}
+                {#{{ og.url() }}#}
+
+                {#para copiar en otras paginas#}
+                {#{{ og.title() }}#}
+                {#{{ og.description() }}#}
+                {#{{ og.image() }}#}
+            {% endblock %}
+
+            {% block bi3d %}
+                {#para copiar en otras paginas#}
+                {#{{ bi3d.art_id() }}#}
+                {#{{ bi3d.section() }}#}
+                {#{{ bi3d.art_title() }}#}
+                {#{{ bi3d.pub_date() }}#}
+            {% endblock %}
+        {% endblock %}
+
+        {#{{ head.dns_prefetch() }}#}
+        {#{{ head.apple_touch_icon() }}#}
+
+        {% block stylesheets %}
+
+            {#'@CoreBundle/Resources/public/main-assets/plugins/pace/pace.min.css'#}
+
+            {% stylesheets
+            filter='cssrewrite'
+            'bundles/app/main-assets/thirdparty/font-awesome/css/font-awesome.min.css'
+            'bundles/app/main-assets/thirdparty/ionicons/css/ionicons.min.css'
+            'bundles/app/main-assets/plugins/iCheck/flat/orange.css'
+            'bundles/app/main-assets/plugins/iCheck/square/orange.css'
+            'bundles/app/main-assets/plugins/iCheck/square/green.css'
+            'bundles/app/main-assets/plugins/iCheck/square/pink.css'
+            'bundles/app/main-assets/bootstrap/css/bootstrap.min.css'
+            '@AppBundle/Resources/public/main-assets/dist/css/AdminLTE.min.css'
+            '@AppBundle/Resources/public/main-assets/plugins/morris/morris.css'
+            '@AppBundle/Resources/public/main-assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css'
+            '@AppBundle/Resources/public/main-assets/plugins/datepicker/datepicker3.css'
+            '@AppBundle/Resources/public/main-assets/plugins/daterangepicker/daterangepicker.css'
+            '@AppBundle/Resources/public/main-assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'
+            '@AppBundle/Resources/public/common/css/skin-tianos.css'
+            '@AppBundle/Resources/public/common/css/tianos.css'
+            '@AppBundle/Resources/public/main-assets/dist/css/skins/_all-skins.min.css'
+            '@AppBundle/Resources/public/css/default.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+
+            <style>
+                .login-box, .register-box{
+                    margin: 3% auto;
+                }
+                input[type=checkbox]{
+                    height: 20px;
+                    width: 20px;
+                }
+            </style>
+
+        {% endblock %}
+
+    </head>
+
+    <body class="{{ project_skin }} hold-transition sidebar-mini {% block bodyclass %}{% endblock %}">
+
+    {{ include('AppBundle::TemplateMain/2_header_security.html.twig') }}
+
+    {{ html.flash_message_success }}
+    {{ html.flash_message_warning }}
+    {{ html.flash_message_error }}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block javascripts %}
+
+        {% javascripts
+        '@AppBundle/Resources/public/main-assets/plugins/jQuery/jquery-2.2.3.min.js'
+        '@AppBundle/Resources/public/main-assets/bootstrap/js/bootstrap.min.js'
+        '@AppBundle/Resources/public/js/background.cycle.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {#HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries#}
+        <!--[if lt IE 9]>
+        <script src="{{ asset('bundles/backend/html5shiv/html5shiv.min.js')}}"></script>
+        <script src="{{ asset('bundles/backend/respond/respond.min.js')}}"></script>
+        <![endif]-->
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("body").backgroundCycle({
+                    imageUrls: [
+                        '{{ asset('bundles/app/images/bg-image/bg-1.jpg')}}',
+                        '{{ asset('bundles/app/images/bg-image/bg-2.jpg')}}',
+                        '{{ asset('bundles/app/images/bg-image/bg-3.png')}}',
+                        {#'{{ asset('bundles/app/images/bg-image/bg-4.jpg')}}',#}
+                        {#'{{ asset('bundles/app/images/bg-image/bg-5.jpg')}}',#}
+                        {#'{{ asset('bundles/app/images/bg-image/bg-1.png')}}'#}
+                    ],
+                    fadeSpeed: 1500,
+                    duration: 3000,
+                    backgroundSize: SCALING_MODE_COVER
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+
+            {#To make Pace works on Ajax calls#}
+//            $(document).ajaxStart(function() { Pace.restart(); });
+
+        </script>
+
+    {% endblock %}
+
+    </body>
+    </html>
+{% endspaceless %}

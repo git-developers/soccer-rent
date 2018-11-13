@@ -1,0 +1,112 @@
+{% extends "AppBundle::template_splash.html.twig" %}
+
+{% block bodyclass %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {#
+    {% stylesheets
+        '@AppBundle/Resources/public/common/css/tree.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    #}
+
+    <style>
+        .content .row{
+            background-color: #FDF001;
+        }
+        .content .numbers{
+            font-size: 80px;
+            font-weight: bold;
+            font-style: italic;
+            /*background-color: red;*/
+            position: absolute;
+            text-align: center;
+            top:80px;
+            left: 27%;
+            color:black;
+        }
+        .content .action{
+            /*background-color: blue;*/
+            position: absolute;
+            text-align: center;
+            top:365px;
+            left: 42%;
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#
+    {% javascripts
+    '@AppBundle/Resources/public/tree/js/formCreate.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    #}
+
+    <script type="text/javascript">
+
+        var timer = null,
+                interval = 1000,
+                value = 0,
+                numbers;
+
+
+        $("#start").click(function() {
+            if (timer !== null) return;
+            timer = setInterval(function () {
+                value = value+1;
+                $("#input").val(value);
+
+                if(parseInt(value) < 60){
+                    numbers = '0.' + value;
+                }else if(parseInt(value) > 60){
+                    var min = parseInt(parseInt(value)/60);
+                    var seg = parseInt(value) - (min * 60);
+                    numbers = min + '.' + seg;
+                }
+
+                $(".numbers").html(numbers);
+
+            }, interval);
+        });
+
+        $("#stop").click(function() {
+            clearInterval(timer);
+            timer = null
+        });
+
+        $('.action').click(function() {
+            $('.fa-fw').toggle();
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <input type="hidden" id="input" />
+
+    <section class="content">
+        <div class="row" align="center">
+            <div class="numbers">0.00</div>
+            <div class="action">
+                <i id="start" class="fa fa-3x fa-fw fa-play"></i>
+                <i id="stop" class="fa fa-3x fa-fw fa-pause" style="display: none"></i>
+            </div>
+            <img src="{{ asset('bundles/app/images/splash/run.jpg') }}" style="height: 520px">
+        </div>
+    </section>
+
+    {#{{ include('AppBundle:Tree:Modal/create.html.twig') }}#}
+
+{% endblock %}

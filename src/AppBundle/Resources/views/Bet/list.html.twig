@@ -1,0 +1,127 @@
+{% extends "AppBundle::template.html.twig" %}
+
+{% block bodyclass %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {#
+    {% stylesheets
+        '@AppBundle/Resources/public/common/css/tree.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    #}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#
+    {% javascripts
+    '@AppBundle/Resources/public/tree/js/formCreate.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    #}
+
+    <script type="text/javascript">
+        $("button").click(function(){
+            alert("Esperar sentado por favor...");
+        });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    {#{{ include('AppBundle:Bet:Modal/view.html.twig') }}#}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-money"></i> Apostar
+            <small>panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <form name="" method="post" class="">
+    <section class="content">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border ">
+                        <h3 class="box-title">lista de apuestas</h3>
+                    </div>
+                    <div class="box-body">
+
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th style="width: 3%">#</th>
+                                <th style="width: 40%">Equipos</th>
+                                <th style="width: 15%">Creado</th>
+                                <th style="width: 40px">Porcentage</th>
+                                <th style="width: 10px">pagos</th>
+                            </tr>
+
+                            {% for key, entity in entities %}
+
+                                <tr>
+                                    <td>
+                                        <span class="badge bg-blue">{{ entity.idIncrement }}</span>
+                                    </td>
+                                    <td>
+                                        {{ entity.teamHome }} <span class="badge bg-green">{{ entity.teamHomeScore }}</span>
+                                        vs
+                                        <span class="badge bg-green">{{ entity.teamAwayScore }}</span> {{ entity.teamAway }}
+                                    </td>
+                                    <td>
+                                        {{ entity.created|date('Y-m-d H:i:s') }}
+                                    </td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-primary" style="width: {{ random(100) }}%"></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-cobrar">
+                                            $ Cobrar
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <div class="box-footer">
+                        {#<button type="submit" class="btn btn-primary">Enviar apuesta</button>#}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    </form>
+
+{% endblock %}

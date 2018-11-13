@@ -1,0 +1,27 @@
+#sudo vi /etc/nginx/sites-enabled/default
+
+server {
+    listen 85 default_server;
+    listen [::]:85 default_server;
+
+    root /var/www/html/soccer-rent/web;
+
+    # Add index.php to the list if you are using PHP
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    location / {
+        try_files $uri /app_dev.php$is_args$args;
+    }
+
+    location ~ ^/(app_dev|config)\.php(/|$) {
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        include fastcgi_params;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        fastcgi_param  SCRIPT_FILENAME  $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+    }
+    error_log /var/log/nginx/soccer-rent_error.log;
+    access_log /var/log/nginx/soccer-rent_access.log;
+}

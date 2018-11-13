@@ -1,0 +1,17 @@
+app_security_login:
+    path: /login
+    defaults: { _controller: AppBundle:Security:login }
+    methods: [GET, POST]
+
+app_security_logout:
+    path: /logout
+    defaults: { _controller: AppBundle:Security:logout }
+    methods: [GET, POST]
+
+app_security_register:
+    path: /register
+    defaults: { _controller: AppBundle:Security:register }
+    methods: [GET, POST]
+
+app_security_login_check:
+    path: /login_check
